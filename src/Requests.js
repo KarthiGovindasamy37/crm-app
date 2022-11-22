@@ -1,14 +1,16 @@
 import axios from 'axios'
-import React, { useContext} from 'react'
+import React, { useContext,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
 
-function Requests() {
+function Services() {
 
     let Context=useContext(context)
 
-    
+    useEffect(()=>{
+        Context.setServiceModified(true)
+    },[])
 
     let deletelead=async(id)=>{
         try{
@@ -18,14 +20,14 @@ function Requests() {
         "role":window.localStorage.getItem("app-role")})
         alert(servicedata.data.message)
         
-        if(servicedata.status==200){
-        let exist=Context.services.filter(ele=>ele._id != id)
+        if(servicedata.status===200){
+        let exist=Context.services.filter(ele=>ele._id !== id)
         Context.setServices(exist)
     }
        }
        }catch(error){
         
-        if(error.response.status==404){
+        if(error.response.status===404){
             alert("Sorry file not found")
         }else{
             alert(error.response.data.message) 
@@ -36,7 +38,7 @@ function Requests() {
   return (
     <div>
         {
-        Context.serviceLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+        Context.leadLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
         <div  className="spinner-border text-primary" role="status">
         </div>
       </div> :
@@ -51,7 +53,7 @@ function Requests() {
     
      <div className="card shadow mb-4">
         <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Total Number of Requests - {`${context.service.length}`}</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Total Number of Requests - {`${Context.services.length}`}</h6>
         </div>
         <div className="card-body">
             <div className="table-responsive">
@@ -81,16 +83,16 @@ function Requests() {
                         {
                        Context.services.map((service,index)=>{
                            return <tr>
-                            <td>{index+1}</td>
-                            <td>{service.name}</td>
-                            <td>{service.requestDescription}</td>
-                            <td>{service.status}</td>
-                            <td>
-                                <Link to={`/app/view-request/${service._id}`} style={{width:"80px"}} className='btn btn-primary ms-2'>View</Link>
-                                <Link to={`/app/edit-request/${service._id}`} style={{width:"80px"}} className='btn btn-warning ms-2'>Edit</Link>
-                                <button onClick={()=>deletelead(service._id)} style={{width:"80px"}} className='btn btn-danger ms-2'>Delete</button>
-                            </td>
-                        </tr>
+                           <td>{index+1}</td>
+                           <td>{service.name}</td>
+                           <td>{service.requestDescription}</td>
+                           <td>{service.status}</td>
+                           <td>
+                               <Link to={`/app/view-request/${service._id}`} style={{width:"80px"}} className='btn btn-primary ms-2'>View</Link>
+                               <Link to={`/app/edit-request/${service._id}`} style={{width:"80px"}} className='btn btn-warning ms-2'>Edit</Link>
+                               <button onClick={()=>deletelead(service._id)} style={{width:"80px"}} className='btn btn-danger ms-2'>Delete</button>
+                           </td>
+                       </tr>
                         })
                     }
                     </tbody>
@@ -101,9 +103,13 @@ function Requests() {
     
 
 </div>
-                }
+}
 </div>
+                
+
+ 
+
   )
 }
 
-export default Requests
+export default Services

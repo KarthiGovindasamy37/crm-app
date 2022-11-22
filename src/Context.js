@@ -8,8 +8,7 @@ import { env } from "./config";
 
 export let Provider=({children})=>{
     
-    let[makeApi,setMakeApi]=useState(false)
-    let[mdata,setMdata]=useState(false)
+   
 
     let[users,setUsers]=useState([])
     let[userLoading,setUserLoading]=useState(false)
@@ -26,37 +25,30 @@ export let Provider=({children})=>{
     let navigate=useNavigate()
     
 
-    useEffect(()=>{
-        if(makeApi === true && mdata === true){  
-        loadUsers();
-        loadLeads();
-        loadServices();
-        setMdata(false); 
-        }
-         },[mdata])
+    
 
     useEffect(()=>{
-            if(makeApi === true && userModified === true){
+            if(userModified === true){
                 loadUsers();
-                setUserModified(false)
+                
             }
          },[userModified])
 
     useEffect(()=>{
-            if(makeApi === true && leadModified === true){
+      if(leadModified === true){
                 loadLeads();
-                setLeadModified(false)
-            }
+                
+      }  
          },[leadModified])
 
     useEffect(()=>{
-            if(makeApi === true && serviceModified === true){
+            if(serviceModified === true){
                 loadServices();
-                setServiceModified(false)
+                
             } 
          },[serviceModified])
      
-
+console.log(leadModified);
      
     let loadUsers=async()=>{
         try
@@ -68,6 +60,7 @@ export let Provider=({children})=>{
         if(users.status==200){
             setUsers(users.data);
             setUserLoading(false)
+            setUserModified(false)
         }else{
             alert(users.data.message)
         }
@@ -90,6 +83,7 @@ export let Provider=({children})=>{
       if(lead.status=200){
       setLeads(lead.data)
       setLeadLoading(false)
+      setLeadModified(false)
       }else{
           alert(lead.data.message)
       }
@@ -110,6 +104,7 @@ export let Provider=({children})=>{
       if(service.status==200){
         setServices(service.data)
         setServiceLoading(false)
+        setServiceModified(false)
         
       }else{
         alert(service.data.message)
@@ -127,8 +122,7 @@ export let Provider=({children})=>{
 
     return(
     <context.Provider value={{users,setUsers,userLoading,leads,setLeads,leadLoading,
-    services,setServices,serviceLoading,setUserModified,setLeadModified,setServiceModified,
-    setMdata,setMakeApi}}>
+    services,setServices,serviceLoading,setUserModified,setLeadModified,setServiceModified}}>
         {children}
     </context.Provider>
     )

@@ -1,13 +1,12 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { env } from "./config";
-import context from "./Context"
+
 
 function Login() {
 
-  let Context=useContext(context)
   let navigate=useNavigate()
 
 let formik=useFormik({
@@ -30,11 +29,9 @@ let formik=useFormik({
       
      let userdata = await axios.post(`${env.api}/login`,values)
       if(userdata.status===200){
-        window.localStorage.setItem("app-token",userdata.data.token)
-        window.localStorage.setItem("app-role",userdata.data.role)
-        Context.setMakeApi(true);
-        Context.setMdata(true);
-        navigate("/app/page")
+        window.localStorage.setItem("app-token",userdata.data.token);
+        window.localStorage.setItem("app-role",userdata.data.role);
+        navigate("/app/page");
     }
      } catch (error) {
       alert(error.response.data.message)

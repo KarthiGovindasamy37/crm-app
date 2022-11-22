@@ -75,7 +75,7 @@ function EditLead() {
       let lead = await axios.put(`${env.api}/lead/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
      alert(lead.data.message)
-      if(lead.status==200){
+      if(lead.status===200){
       Context.setLeadModified(true)
       navigate("/app/leads")
 

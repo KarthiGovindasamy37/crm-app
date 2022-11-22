@@ -1,11 +1,15 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { env } from "./config";
 import context from "./Context";
 
 function Users() {
   let Context = useContext(context);
+
+  useEffect(()=>{
+    Context.setUserModified(true)
+    },[])
 
   let deleteuser = async (id) => {
     try {

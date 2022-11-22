@@ -19,9 +19,10 @@ import CreateLead from './CreateLead';
 import ViewLead from './ViewLead';
 import EditLead from './EditLead';
 
-import Requests from './ServiceRequest';
+import Services from './Requests';
 import ViewRequest from './ViewRequest';
 import EditRequest from './EditRequest';
+
 
 
 function App() {
@@ -43,9 +44,10 @@ function App() {
       <Route path='create-lead' element={<CreateLead/>}/>
       <Route path='view-lead/:id' element={<ViewLead/>}/>
       <Route path='edit-lead/:id' element={<EditLead/>}/>
-      <Route path='requests' element={<Requests/>}/>
+      <Route path='requests' element={<Services/>}/>
       <Route path='view-request/:id' element={<ViewRequest/>}/>
       <Route path='edit-request/:id' element={<EditRequest/>}/>
+      
 
 
 
@@ -56,4 +58,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

@@ -74,7 +74,7 @@ function EditRequest() {
       let service = await axios.put(`${env.api}/service/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
      alert(service.data.message)
-      if(service.status==200){
+      if(service.status===200){
       Context.setServiceModified(true)
       navigate("/app/requests")
 
@@ -113,12 +113,12 @@ function EditRequest() {
        name="status"
        onChange={formik.handleChange}
        value={formik.values.status}>
-      <option value="New" selected>Created</option>
-      <option value="Contacted">Open</option>
-      <option value="Qualified">In process</option>
-      <option value="Lost">Released</option>
+      <option value="Created" selected>Created</option>
+      <option value="Open">Open</option>
+      <option value="In process">In process</option>
+      <option value="Released">Released</option>
       <option value="Cancelled">Cancelled</option>
-      <option value="Confirmed">Completed</option>
+      <option value="Completed">Completed</option>
       </select>
       </div>
         <span style={{color:"red"}}>{formik.errors.status}</span>

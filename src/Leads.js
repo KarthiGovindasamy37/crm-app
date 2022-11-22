@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useContext} from 'react'
+import React, { useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
@@ -8,7 +8,9 @@ function Leads() {
 
     let Context=useContext(context)
 
-    
+    useEffect(()=>{
+        Context.setLeadModified(true)
+    },[])
 
     let deletelead=async(id)=>{
         try{
