@@ -24,7 +24,7 @@ function Navbar() {
           <Link to="/app/users" class="nav-link active me-5 text-white" aria-current="page" href="#">Users</Link>
           <Link to="/app/leads" class="nav-link me-5 text-white" href="#">Leads</Link>
           <Link to="/app/requests" class="nav-link me-5 text-white" href="#">Service requests</Link>
-          <span onClick={logout} class="nav-link me-3 text-white"><FontAwesomeIcon icon={faUser} size="xl"/></span>
+          <span onClick={logout} class="nav-link me-3 text-white logout-icon"><FontAwesomeIcon icon={faUser} size="xl"/></span>
 
         </div>
       </div>
