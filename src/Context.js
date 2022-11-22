@@ -48,7 +48,7 @@ export let Provider=({children})=>{
             } 
          },[serviceModified])
      
-console.log(leadModified);
+
      
     let loadUsers=async()=>{
         try

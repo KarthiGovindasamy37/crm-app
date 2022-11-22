@@ -16,10 +16,10 @@ let formik=useFormik({
   },
   validate:(values)=>{
     let errors={};
-    if(formik.values.email===""){
+    if(values.email===""){
       errors.email="Please enter email id"
     }
-    if(formik.values.password===""){
+    if(values.password===""){
       errors.password="Please enter password"
     }
     return errors;
@@ -43,7 +43,7 @@ let formik=useFormik({
     <div className="container-fluid bg">
       <div className="row">
         <div className=" d-flex justify-content-center">
-          <div className="signin col col-sm-8 col-md-6 col-lg-4 mt-5  mb-5">
+          <div className="signin col col-sm-8 col-md-6 col-lg-4 mt-5">
             <div className="container">
               <div className="text-center mt-3">
                 <h2>EPIC CRM</h2>
@@ -60,7 +60,7 @@ let formik=useFormik({
                     onChange={formik.handleChange}
                     value={formik.values.email}
                   />
-                  <span style={{color:"red"}}>{formik.errors.email}</span>
+                  <div style={{color:"red"}}>{formik.errors.email}</div>
                 </div>
                 <div className="mb-3 mt-3">
                   <label for="password" className="form-label">
@@ -73,7 +73,7 @@ let formik=useFormik({
                     onChange={formik.handleChange}
                     value={formik.values.password}
                   />
-                  <span style={{color:"red"}}>{formik.errors.password}</span>
+                  <span className="" style={{color:"red"}}>{formik.errors.password}</span>
                 </div>
                 <div className="d-flex justify-content-center mt-5">
                   <button type="submit" disabled={!formik.isValid} className="btn btn-primary">Login</button>
