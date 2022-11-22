@@ -4,13 +4,14 @@ import "./App.css"
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { env } from './config';
-import { leadContext } from './Context1';
+import { context } from './Context';
 
 function EditLead() {
 
-  let context=useContext(leadContext)
+  let Context=useContext(context)
   let navigate=useNavigate()
   let params=useParams()
+  let[loading,setLoading]=useState(false)
 
   useEffect(()=>{
     loadlead()
@@ -18,6 +19,7 @@ function EditLead() {
 
   let loadlead=async()=>{
      try {
+      setLoading(true)
         let leaddata=await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                              "role":window.localStorage.getItem("app-role")}})
          if(leaddata.status==200){
@@ -30,6 +32,7 @@ function EditLead() {
                 description:data.description,
                 status:data.status 
             })
+            setLoading(false);
          }else{
             alert(leaddata.data.message)
          }
@@ -73,7 +76,7 @@ function EditLead() {
                                                                            "role":window.localStorage.getItem("app-role")}})
      alert(lead.data.message)
       if(lead.status==200){
-      context.setmdata(1)
+      Context.setLeadModified(true)
       navigate("/app/leads")
 
     }
@@ -87,6 +90,10 @@ function EditLead() {
 })
   
   return (
+    loading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+      <div  className="spinner-border text-primary" role="status">
+      </div>
+    </div> :
     <div className='container-fluid createbg'>
     <div className='container '>
       <form onSubmit={formik.handleSubmit}>

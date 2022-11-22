@@ -4,13 +4,13 @@ import "./App.css"
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { env } from './config';
-import { serviceContext } from './Context2';
+import { context } from './Context';
 
 function EditRequest() {
 
-  let context=useContext(serviceContext)
+  let Context=useContext(context)
   let navigate=useNavigate()
-  let[getrequest,setrequest]=useState({})
+  let[loading,setLoading]=useState(false)
   let params=useParams()
 
   useEffect(()=>{
@@ -19,6 +19,7 @@ function EditRequest() {
 
   let loadrequest=async()=>{
      try {
+      setLoading(true)
         let requestdata=await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                              "role":window.localStorage.getItem("app-role")}})
          
@@ -32,6 +33,7 @@ function EditRequest() {
                 statusDescription:data.statusDescription,
               
             })
+            setLoading(false)
          }else{
            
             alert(requestdata.data.message)
@@ -73,7 +75,7 @@ function EditRequest() {
                                                                            "role":window.localStorage.getItem("app-role")}})
      alert(service.data.message)
       if(service.status==200){
-      context.setmdata(1)
+      Context.setServiceModified(true)
       navigate("/app/requests")
 
     }
@@ -87,6 +89,10 @@ function EditRequest() {
 })
   
   return (
+    loading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+      <div  className="spinner-border text-primary" role="status">
+      </div>
+    </div> :
     <div className='container-fluid createbg'>
     <div className='container '>
       <form onSubmit={formik.handleSubmit}>

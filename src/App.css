@@ -1,5 +1,5 @@
 .bg{
-  height: 657px;
+  height:max-content;
   background-color: blue;
 }
 .signin{

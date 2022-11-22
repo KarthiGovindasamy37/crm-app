@@ -8,7 +8,7 @@ import context from './Context';
 
 function EditUser() {
 
-  let context1=useContext(context)
+  let Context=useContext(context)
   let navigate=useNavigate()
   let params=useParams()
   let[loading,setloading]=useState(false)
@@ -38,8 +38,8 @@ function EditUser() {
         
      alert(error.response.data.message)   
     }
-    
-                                                            }
+ }
+ 
   let formik=useFormik({
     initialValues:{
       firstname:"",
@@ -78,7 +78,7 @@ function EditUser() {
       role:"",
       access:""
       })
-      context1.setmdata(1)
+      Context.setUsermodified(true)
       navigate("/app/users")
 
     }

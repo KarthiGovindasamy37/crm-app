@@ -8,7 +8,7 @@ import context from './Context';
 
 function CreateUser() {
 
-  let context1=useContext(context)
+  let Context=useContext(context)
   let navigate=useNavigate()
   let formik=useFormik({
     initialValues:{
@@ -55,7 +55,7 @@ function CreateUser() {
       password:"",
       access:""
       })
-      context1.setmdata(1)
+      Context.setUserModified(true)
       navigate("/app/users")
 
     }

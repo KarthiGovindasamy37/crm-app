@@ -1,16 +1,14 @@
 import axios from 'axios'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
-import { leadContext } from './Context1'
+import { context } from './Context'
 
 function Leads() {
 
-    let context=useContext(leadContext)
+    let Context=useContext(context)
 
-    useEffect(()=>{
-     context.setmdata(1)
-    },[])
+    
 
     let deletelead=async(id)=>{
         try{
@@ -20,14 +18,14 @@ function Leads() {
         "role":window.localStorage.getItem("app-role")})
         alert(lead.data.message)
         
-        if(lead.status==200){
-        let exist=context.lead.filter(ele=>ele._id != id)
-        context.setlead(exist)
+        if(lead.status===200){
+        let exist=Context.leads.filter(ele=>ele._id !== id)
+        Context.setleads(exist)
     }
        }
        }catch(error){
         
-        if(error.response.status==404){
+        if(error.response.status===404){
             alert("Sorry file not found")
         }else{
             alert(error.response.data.message) 
@@ -38,7 +36,7 @@ function Leads() {
   return (
     <div>
         {
-        context.loading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+        Context.leadLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
         <div  className="spinner-border text-primary" role="status">
         </div>
       </div> :
@@ -54,7 +52,7 @@ function Leads() {
     
      <div className="card shadow mb-4">
         <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Total Number of leads - {`${context.lead.length}`}</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Total Number of leads - {`${Context.leads.length}`}</h6>
         </div>
         <div className="card-body">
             <div className="table-responsive">
@@ -84,7 +82,7 @@ function Leads() {
                     </tfoot>
                     <tbody>
                         {
-                       context.lead.map((lead,index)=>{
+                       Context.leads.map((lead,index)=>{
                            return <tr>
                             <td>{index+1}</td>
                             <td>{lead.name}</td>

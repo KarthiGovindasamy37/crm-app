@@ -12,13 +12,13 @@ import Page from './Page';
 import Users from './Users'
 import ViewUser from './ViewUser';
 import EditUser from './EditUser';
-import { UserProvider } from './Context';
-import { LeadProvider } from './Context1';
+import { Provider} from './Context';
+
 import Leads from './Leads';
 import CreateLead from './CreateLead';
 import ViewLead from './ViewLead';
 import EditLead from './EditLead';
-import { ServiceProvider } from './Context2';
+
 import Requests from './ServiceRequest';
 import ViewRequest from './ViewRequest';
 import EditRequest from './EditRequest';
@@ -27,9 +27,7 @@ import EditRequest from './EditRequest';
 function App() {
   return (
     <BrowserRouter>
-    <ServiceProvider>
-    <LeadProvider>
-    <UserProvider>
+    <Provider>
     <Routes>
       <Route path='/' element={<Login/>}/>
       <Route path='/forgot' element={<ForgotMail/>}/>
@@ -53,9 +51,7 @@ function App() {
 
       </Route>
     </Routes>
-</UserProvider>
-</LeadProvider>
-</ServiceProvider>
+</Provider>
     </BrowserRouter>
   );
 }

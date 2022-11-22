@@ -4,11 +4,11 @@ import "./App.css"
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { env } from './config';
-import { leadContext } from './Context1';
+import { context } from './Context';
 
 function CreateLead() {
 
-  let context=useContext(leadContext)
+  let Context=useContext(context)
   let navigate=useNavigate()
   let formik=useFormik({
     initialValues:{
@@ -45,7 +45,7 @@ function CreateLead() {
                                                                            "role":window.localStorage.getItem("app-role")}})
      alert(lead.data.message)
       if(lead.status==200){
-      context.setmdata(1)
+        Context.setLeadModified(true)
       navigate("/app/leads")
 
     }

@@ -1,16 +1,14 @@
 import axios from 'axios'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
-import { serviceContext } from './Context2'
+import { context } from './Context'
 
 function Requests() {
 
-    let context=useContext(serviceContext)
+    let Context=useContext(context)
 
-    useEffect(()=>{
-        context.setmdata(1)
-       },[])
+    
 
     let deletelead=async(id)=>{
         try{
@@ -21,8 +19,8 @@ function Requests() {
         alert(servicedata.data.message)
         
         if(servicedata.status==200){
-        let exist=context.service.filter(ele=>ele._id != id)
-        context.setservice(exist)
+        let exist=Context.services.filter(ele=>ele._id != id)
+        Context.setServices(exist)
     }
        }
        }catch(error){
@@ -38,7 +36,7 @@ function Requests() {
   return (
     <div>
         {
-        context.loading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+        Context.serviceLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
         <div  className="spinner-border text-primary" role="status">
         </div>
       </div> :
@@ -81,7 +79,7 @@ function Requests() {
                     </tfoot>
                     <tbody>
                         {
-                       context.service.map((service,index)=>{
+                       Context.services.map((service,index)=>{
                            return <tr>
                             <td>{index+1}</td>
                             <td>{service.name}</td>

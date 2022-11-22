@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { env } from "./config";
+import context from "./Context"
 
 function Login() {
+
+  let Context=useContext(context)
   let navigate=useNavigate()
 
 let formik=useFormik({
@@ -24,10 +27,13 @@ let formik=useFormik({
   },
   onSubmit:async(values)=>{
     try {
+      
      let userdata = await axios.post(`${env.api}/login`,values)
       if(userdata.status===200){
         window.localStorage.setItem("app-token",userdata.data.token)
         window.localStorage.setItem("app-role",userdata.data.role)
+        Context.setMakeApi(true);
+        Context.setMdata(true);
         navigate("/app/page")
     }
      } catch (error) {
@@ -39,7 +45,7 @@ let formik=useFormik({
   return (
     <div className="container-fluid bg">
       <div className="row">
-        <div className=" d-flex justify-content-center mt-5">
+        <div className=" d-flex justify-content-center">
           <div className="signin col col-sm-8 col-md-6 col-lg-4 mt-5  mb-5">
             <div className="container">
               <div className="text-center mt-3">
