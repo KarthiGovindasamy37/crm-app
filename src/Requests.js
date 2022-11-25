@@ -38,7 +38,7 @@ function Services() {
   return (
     <div>
         {
-        Context.leadLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
+        Context.serviceLoading ? <div style={{height:"400px"}} className="d-flex justify-content-center align-items-center">
         <div  className="spinner-border text-primary" role="status">
         </div>
       </div> :
