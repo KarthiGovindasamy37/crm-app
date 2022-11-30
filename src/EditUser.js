@@ -130,8 +130,8 @@ function EditUser() {
         </div>
         <div className='col-md-6 6 mt-3'>
         <label>Role</label>
-        <div class="input-group ">
-       <select class="form-select" id="inputGroupSelect02"
+        <div className="input-group ">
+       <select className="form-select" id="inputGroupSelect02"
        name="role"
        onChange={formik.handleChange}
        value={formik.values.role}>
@@ -146,8 +146,8 @@ function EditUser() {
        
         <div className=' col-md-6 mt-3 '>
         <label>If role is employee mention access to edit</label>
-        <div class="input-group ">
-       <select class="form-select" id="inputGroupSelect02"
+        <div className="input-group ">
+       <select className="form-select" id="inputGroupSelect02"
        name="access"
        onChange={formik.handleChange}
        value={formik.values.access}>

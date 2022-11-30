@@ -108,8 +108,8 @@ function EditRequest() {
         </div>
         <div className='col-md-6 6 mt-3'>
         <label>Status</label>
-        <div class="input-group ">
-       <select class="form-select" id="inputGroupSelect02"
+        <div className="input-group ">
+       <select className="form-select" id="inputGroupSelect02"
        name="status"
        onChange={formik.handleChange}
        value={formik.values.status}>
@@ -124,9 +124,9 @@ function EditRequest() {
         <span style={{color:"red"}}>{formik.errors.status}</span>
         </div>
         <div className='col-md-6 6 mt-3'>
-        <div class="">
-       <label for="exampleFormControlTextarea1" class="form-label mb-0">Request Description</label>
-       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+        <div className="">
+       <label for="exampleFormControlTextarea1" className="form-label mb-0">Request Description</label>
+       <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
         name="requestDescription"
         onChange={formik.handleChange}
         value={formik.values.requestDescription}
@@ -135,9 +135,9 @@ function EditRequest() {
        <span style={{color:"red"}}>{formik.errors.requestDescription}</span>
         </div>
         <div className='col-md-6 6 mt-3'>
-        <div class="mb-3">
-       <label for="exampleFormControlTextarea1" class="form-label mb-0">Status Description</label>
-       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+        <div className="mb-3">
+       <label for="exampleFormControlTextarea1" className="form-label mb-0">Status Description</label>
+       <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
         name="statusDescription"
         onChange={formik.handleChange}
         value={formik.values.statusDescription}

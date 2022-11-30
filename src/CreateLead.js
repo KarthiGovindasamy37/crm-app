@@ -81,9 +81,9 @@ function CreateLead() {
         <span style={{color:"red"}}>{formik.errors.email}</span>
         </div>
         <div className='col-md-6 6 mt-3'>
-        <div class="">
-       <label for="exampleFormControlTextarea1" class="form-label mb-0">Address</label>
-       <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"
+        <div className="">
+       <label for="exampleFormControlTextarea1" className="form-label mb-0">Address</label>
+       <textarea className="form-control" id="exampleFormControlTextarea1" rows="1"
         name="address"
         onChange={formik.handleChange}
         value={formik.values.address}
@@ -101,9 +101,9 @@ function CreateLead() {
         <span style={{color:"red"}}>{formik.errors.contact}</span>
         </div>
         <div className='col-md-6 6 mt-3'>
-        <div class="mb-3">
-       <label for="exampleFormControlTextarea1" class="form-label mb-0">Status description</label>
-       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+        <div className="mb-3">
+       <label for="exampleFormControlTextarea1" className="form-label mb-0">Status description</label>
+       <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"
         name="description"
         onChange={formik.handleChange}
         value={formik.values.description}
@@ -112,8 +112,8 @@ function CreateLead() {
         </div>
         <div className='col-md-6 6 mt-3'>
         <label>Status</label>
-        <div class="input-group ">
-       <select class="form-select" id="inputGroupSelect02"
+        <div className="input-group ">
+       <select className="form-select" id="inputGroupSelect02"
        name="status"
        onChange={formik.handleChange}
        value={formik.values.status}>
