@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { env } from "./config";
+import { toast } from 'react-toastify'
 
 function PasswordChange() {
 
@@ -29,11 +30,11 @@ function PasswordChange() {
       try {
         let user=await axios.post(`${env.api}/resetpass`, values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}});
-        alert(user.data.message)
+        toast.success(user.data.message,{toastId:"23"})
         navigate("/")
     } catch (error) {
       
-        alert(error.response.data.message)
+        toast.error(error.response.data.message,{toastId:"24"})
       }
     },
   });

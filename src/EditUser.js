@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { env } from './config';
 import context from './Context';
+import { toast } from 'react-toastify'
 
 function EditUser() {
 
@@ -32,11 +33,11 @@ function EditUser() {
         access:user.data.access 
     })
  }else{
-    alert(user.data.message)    
+    toast.info(user.data.message,{toastId:"13"})    
 }
     } catch (error) {
         
-     alert(error.response.data.message)   
+     toast.error(error.response.data.message,{toastId:"14"})   
     }
  }
  
@@ -69,7 +70,7 @@ function EditUser() {
       try{
       let user = await axios.put(`${env.api}/edituser/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     alert(user.data.message)
+     toast.success(user.data.message,{toastId:"15"})
       if(user.status==200){
       formik.setValues({
         firstname:"",
@@ -84,7 +85,7 @@ function EditUser() {
     }
     } 
     catch(error){
-        alert(error.response.data.message)
+        toast.error(error.response.data.message,{toastId:"16"})
     }
     
   }

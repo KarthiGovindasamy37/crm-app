@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { env } from './config';
 import { context } from './Context';
-
+import { toast } from 'react-toastify'
 function CreateLead() {
 
   let Context=useContext(context)
@@ -43,7 +43,7 @@ function CreateLead() {
       try{
       let lead = await axios.post(`${env.api}/createlead`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     alert(lead.data.message)
+     toast.success(lead.data.message,{toastId:"1"})
       if(lead.status==200){
         Context.setLeadModified(true)
       navigate("/app/leads")
@@ -51,7 +51,7 @@ function CreateLead() {
     }
     } 
     catch(error){
-   alert(error.response.data.message)
+   toast.error(error.response.data.message,{toastId:"2"})
     }
     
   }

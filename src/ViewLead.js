@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { env } from './config'
+import { toast } from 'react-toastify'
+
 function ViewLead() {
     let params=useParams()
     let[lead,setlead]=useState({})
@@ -21,11 +23,11 @@ function ViewLead() {
             setlead(lead.data)
             setloading(false)
          }else{
-            alert(lead.data.message)
+            toast.info(lead.data.message,{toastId:"32"})
          }
                                                                              
         } catch (error) {
-           alert(error.response.data.message) 
+           toast.error(error.response.data.message,{toastId:"33"}) 
         }
       
     }

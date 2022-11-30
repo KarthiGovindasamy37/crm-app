@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link } from "react-router-dom";
 import { env } from "./config";
+import { toast } from 'react-toastify'
 
 function ForgotMail() {
   let formik = useFormik({
@@ -20,10 +21,10 @@ function ForgotMail() {
       try {
         let user=await axios.post(`${env.api}/forgot`, values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                         "role":window.localStorage.getItem("app-role")}});
-        alert(user.data.message)
+        toast.info(user.data.message,{toastId:"17"})
     } catch (error) {
       
-        alert(error.response.data.message)
+        toast.error(error.response.data.message,{toastId:"18"})
       }
     },
   });

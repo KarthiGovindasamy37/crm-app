@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { env } from './config'
+import { toast } from 'react-toastify'
+
 function ViewUser() {
     let params=useParams()
     let[user,setuser]=useState({})
@@ -22,12 +24,12 @@ function ViewUser() {
             setloading(false)
          }else{
           
-            alert(viewdata.data.message)
+            toast.info(viewdata.data.message,{toastId:"36"})
          }
                                                                              
         } catch (error) {
           
-           alert(error.response.data.message) 
+           toast.error(error.response.data.message,{toastId:"37"}) 
         }
       
     }

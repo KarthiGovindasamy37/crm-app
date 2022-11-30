@@ -3,6 +3,7 @@ import React, { useContext, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
+import { toast } from 'react-toastify'
 
 function Leads() {
 
@@ -18,7 +19,7 @@ function Leads() {
        if(ask){
         let lead = await axios.delete(`${env.api}/lead/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
         "role":window.localStorage.getItem("app-role")})
-        alert(lead.data.message)
+        toast.success(lead.data.message,{toastId:"19"})
         
         if(lead.status===200){
         let exist=Context.leads.filter(ele=>ele._id !== id)
@@ -28,9 +29,9 @@ function Leads() {
        }catch(error){
         
         if(error.response.status===404){
-            alert("Sorry file not found")
+            toast.error("Sorry file not found",{toastId:"20"})
         }else{
-            alert(error.response.data.message) 
+            toast.error(error.response.data.message,{toastId:"21"}) 
 
         }
         }

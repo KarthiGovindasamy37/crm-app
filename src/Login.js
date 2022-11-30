@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { env } from "./config";
+import { toast } from 'react-toastify'
 
 
 function Login() {
@@ -34,7 +35,7 @@ let formik=useFormik({
         navigate("/app/page");
     }
      } catch (error) {
-      alert(error.response.data.message)
+      toast.error(error.response.data.message,{toastId:"22"})
     }
   }
 })

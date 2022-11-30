@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { env } from './config'
+import { toast } from 'react-toastify'
 
 function TemporaryPass() {
 
@@ -26,7 +27,7 @@ function TemporaryPass() {
       try {
         let info=await axios.post(`${env.api}/temporarypass`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                               "role":window.localStorage.getItem("app-role")}})
-        alert(info.data.message)
+        toast.success(info.data.message,{toastId:"28"})
         if(info.status==200){
           navigate("/reset")
         formik.setValues({
@@ -36,7 +37,7 @@ function TemporaryPass() {
       }
       } catch (error) {
         
-        alert(error.response.data.message)
+        toast.error(error.response.data.message,{toastId:"29"})
       }
     }
   })

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { env } from './config';
 import { context } from './Context';
+import { toast } from 'react-toastify'
 
 function EditRequest() {
 
@@ -36,12 +37,12 @@ function EditRequest() {
             setLoading(false)
          }else{
            
-            alert(requestdata.data.message)
+            toast.info(requestdata.data.message,{toastId:"9"})
          }
 
      } catch (error) {
        
-       alert(error.response.data.message) 
+       toast.error(error.response.data.message,{toastId:"10"}) 
      }
   }
   let formik=useFormik({
@@ -73,7 +74,7 @@ function EditRequest() {
       try{
       let service = await axios.put(`${env.api}/service/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     alert(service.data.message)
+     toast.success(service.data.message,{toastId:"11"})
       if(service.status===200){
       Context.setServiceModified(true)
       navigate("/app/requests")
@@ -82,7 +83,7 @@ function EditRequest() {
     } 
     catch(error){
         
-   alert(error.response.data.message)
+   toast.error(error.response.data.message,{toastId:"12"})
     }
     
   }

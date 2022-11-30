@@ -3,6 +3,7 @@ import React, { useContext,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
+import { toast } from 'react-toastify'
 
 function Services() {
 
@@ -18,7 +19,7 @@ function Services() {
        if(ask){
         let servicedata = await axios.delete(`${env.api}/service/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
         "role":window.localStorage.getItem("app-role")})
-        alert(servicedata.data.message)
+        toast.success(servicedata.data.message,{toastId:"25"})
         
         if(servicedata.status===200){
         let exist=Context.services.filter(ele=>ele._id !== id)
@@ -28,9 +29,9 @@ function Services() {
        }catch(error){
         
         if(error.response.status===404){
-            alert("Sorry file not found")
+            toast.error("Sorry file not found",{toastId:"26"})
         }else{
-            alert(error.response.data.message) 
+            toast.error(error.response.data.message,{toastId:"27"}) 
 
         }
         }

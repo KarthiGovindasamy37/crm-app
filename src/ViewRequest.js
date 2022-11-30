@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { env } from './config'
+import { toast } from 'react-toastify'
+
 function ViewRequest() {
     let params=useParams()
     let[request,setrequest]=useState({})
@@ -21,11 +23,11 @@ function ViewRequest() {
             setrequest(requestdata.data)
             setloading(false)
          }else{
-            alert(requestdata.data.message)
+            toast.info(requestdata.data.message,{toastId:"34"})
          }
                                                                              
         } catch (error) {
-           alert(error.response.data.message) 
+           toast.error(error.response.data.message,{toastId:"35"}) 
         }
       
     }

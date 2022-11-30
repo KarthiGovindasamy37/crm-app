@@ -3,6 +3,7 @@ import React, { useContext,useEffect } from "react";
 import { Link } from "react-router-dom";
 import { env } from "./config";
 import context from "./Context";
+import { toast } from 'react-toastify'
 
 function Users() {
   let Context = useContext(context);
@@ -19,14 +20,14 @@ function Users() {
           headers: { authorization: window.localStorage.getItem("app-token"),
           role: window.localStorage.getItem("app-role")}
         });
-        alert(user.data.message);
+        toast.success(user.data.message,{toastId:"30"});
         if (user.status === 200) {
           let exist = Context.users.filter((ele) => ele._id !== id);
           Context.setUsers(exist);
         }
       }
     } catch (error) {
-      alert(error.response.data.message);
+      toast.error(error.response.data.message,{toastId:"31"});
     }
   };
   return (

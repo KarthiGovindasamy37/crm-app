@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { env } from './config';
 import { context } from './Context';
+import { toast } from 'react-toastify'
 
 function EditLead() {
 
@@ -34,11 +35,11 @@ function EditLead() {
             })
             setLoading(false);
          }else{
-            alert(leaddata.data.message)
+            toast.success(leaddata.data.message,{toastId:"5"})
          }
 
      } catch (error) {
-       alert(error.response.data.message) 
+       toast.error(error.response.data.message,{toastId:"6"}) 
      }
   }
   let formik=useFormik({
@@ -74,7 +75,7 @@ function EditLead() {
       try{
       let lead = await axios.put(`${env.api}/lead/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     alert(lead.data.message)
+     toast.success(lead.data.message,{toastId:"7"})
       if(lead.status===200){
       Context.setLeadModified(true)
       navigate("/app/leads")
@@ -83,7 +84,7 @@ function EditLead() {
     } 
     catch(error){
         
-   alert(error.response.data.message)
+   toast.error(error.response.data.message,{toastId:"8"})
     }
     
   }

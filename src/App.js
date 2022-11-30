@@ -3,6 +3,8 @@ import './App.css';
 import Login from './Login';
 import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer,Flip} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ForgotMail from './ForgotMail';
 import PasswordChange from './PasswordChange';
 import TemporaryPass from './TemporaryPass';
@@ -54,6 +56,17 @@ function App() {
       </Route>
     </Routes>
 </Provider>
+<ToastContainer position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+transition={Flip}/>
     </BrowserRouter>
   );
 }

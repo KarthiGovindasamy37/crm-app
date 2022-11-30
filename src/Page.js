@@ -1,42 +1,6 @@
-import axios from 'axios';
-import { useFormik } from 'formik';
 import React from 'react'
-import { env } from './config';
 
 function Page() {
-
-  let formik=useFormik({
-    initialValues:{
-      name:"",
-      email:"",
-      contact:""  
-    },
-    validate:(values)=>{
-      let errors={};
-      if(values.name===""){
-        errors.name="Please enter your name"
-      }
-      if(values.email===""){
-        errors.email="Please enter email"
-      }
-      if(values.contact===""){
-        errors.contact="Please enter contact number"
-      }
-      return errors;
-    },
-    onSubmit :async(values)=>{
-      try{
-      let enquiry = await axios.post(`${env.api}/enquiry`,values)
-     alert(enquiry.data.message)
-      
-    } 
-    catch(error){
-        
-   alert(error.response.data.message)
-    }
-    
-  }
-})
   return (
     <div className="container-fluid bg-primary divbg">
     <div className="container ">
