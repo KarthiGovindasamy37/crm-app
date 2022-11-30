@@ -1,4 +1,4 @@
 export const env={
-   api:"https://nodejs-crm-app.herokuapp.com"
+   api:"https://dull-teal-foal-tam.cyclic.app"
    
 }
