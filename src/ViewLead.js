@@ -19,7 +19,7 @@ function ViewLead() {
             let lead = await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                                     "role":window.localStorage.getItem("app-role")}})
           
-         if(lead.status==200){
+         if(lead.status===200){
             setlead(lead.data)
             setloading(false)
          }else{

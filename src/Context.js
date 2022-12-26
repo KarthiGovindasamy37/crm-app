@@ -69,7 +69,7 @@ export let Provider=({children})=>{
     }catch(error){
      
       alert(error.response.data.message)
-      if(error.response.status==440) {
+      if(error.response.status===440) {
         navigate("/")
        }
     }
