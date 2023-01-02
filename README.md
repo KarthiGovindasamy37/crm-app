@@ -1,3 +1,12 @@
+*CRM app is an intranet web app that allows only Admin and Manager to create users.
+
+*Middleware allows only employee with rights to create and update the lead or service request.
+
+*Employee with no rights have the access to read the data alone.
+
+*While a new lead or service request created in the system it automatically trigers an email to the manager and admin.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
