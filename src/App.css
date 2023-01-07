@@ -2,6 +2,11 @@
   height:657px;
   background-color: blue;
 }
+@media only screen and (max-width: 300px){
+  .bg{
+    height: max-content;
+  }
+}
 .signin{
   background-color: aquamarine;
   height: max-content;
