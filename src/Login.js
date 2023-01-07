@@ -44,7 +44,7 @@ let formik=useFormik({
     <div className="container-fluid bg">
       <div className="row">
         <div className=" d-flex justify-content-center">
-          <div className="signin col col-sm-8 col-md-6 col-lg-4 mt-5">
+          <div className="signin login-pad col col-sm-8 col-md-6 col-lg-4 mt-5">
             <div className="container">
               <div className="text-center mt-3">
                 <h2>EPIC CRM</h2>

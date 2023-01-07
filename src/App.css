@@ -2,9 +2,12 @@
   height:657px;
   background-color: blue;
 }
-@media only screen and (max-width: 300px){
+@media only screen and (max-width: 315px){
   .bg{
     height: max-content;
+  }
+  .login-pad{
+    padding-bottom: 20px;
   }
 }
 .signin{
