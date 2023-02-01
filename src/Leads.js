@@ -19,22 +19,16 @@ function Leads() {
        if(ask){
         let lead = await axios.delete(`${env.api}/lead/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
         "role":window.localStorage.getItem("app-role")})
-        toast.success(lead.data.message,{toastId:"19"})
-        
+                
         if(lead.status===200){
+        toast.success(lead.data.message,{toastId:"19"})
         let exist=Context.leads.filter(ele=>ele._id !== id)
         Context.setleads(exist)
     }
        }
        }catch(error){
-        
-        if(error.response.status===404){
-            toast.error("Sorry file not found",{toastId:"20"})
-        }else{
             toast.error(error.response.data.message,{toastId:"21"}) 
-
-        }
-        }
+       }
     }
   return (
     <div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { env } from "./config";
 import { toast } from 'react-toastify'
@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 function Login() {
 
   let navigate=useNavigate()
+  let [loading,setLoading] = useState(false)
 
 let formik=useFormik({
   initialValues:{
@@ -27,14 +28,16 @@ let formik=useFormik({
   },
   onSubmit:async(values)=>{
     try {
-      
+      setLoading(true)
      let userdata = await axios.post(`${env.api}/login`,values)
+     setLoading(false)
       if(userdata.status===200){
         window.localStorage.setItem("app-token",userdata.data.token);
         window.localStorage.setItem("app-role",userdata.data.role);
         navigate("/app/page");
     }
      } catch (error) {
+      setLoading(false)
       toast.error(error.response.data.message,{toastId:"22"})
     }
   }
@@ -77,7 +80,14 @@ let formik=useFormik({
                   <span className="" style={{color:"red"}}>{formik.errors.password}</span>
                 </div>
                 <div className="d-flex justify-content-center mt-5">
+                  {
+                    loading ?
+                    <button disabled className="btn btn-primary pb-1 pt-2">
+                    <div class="spinner-border text-white" style={{height:"20px",width:"20px"}} role="status"></div>
+                    </button>
+                   :
                   <button type="submit" disabled={!formik.isValid} className="btn btn-primary">Login</button>
+                  }        
                 </div>
               </form>
               <div className="d-flex justify-content-end mt-4 mb-3">

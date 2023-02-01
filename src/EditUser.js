@@ -32,9 +32,7 @@ function EditUser() {
         role:user.data.role,
         access:user.data.access 
     })
- }else{
-    toast.info(user.data.message,{toastId:"13"})    
-}
+ }
     } catch (error) {
         
      toast.error(error.response.data.message,{toastId:"14"})   
@@ -70,7 +68,7 @@ function EditUser() {
       try{
       let user = await axios.put(`${env.api}/edituser/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     toast.success(user.data.message,{toastId:"15"})
+     
       if(user.status==200){
       formik.setValues({
         firstname:"",
@@ -79,6 +77,7 @@ function EditUser() {
       role:"",
       access:""
       })
+      toast.success(user.data.message,{toastId:"15"})
       Context.setUserModified(true)
       navigate("/app/users")
 

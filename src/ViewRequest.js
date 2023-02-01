@@ -18,14 +18,10 @@ function ViewRequest() {
             setloading(true)
             let requestdata = await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                                     "role":window.localStorage.getItem("app-role")}})
-          
-         if(requestdata.status==200){
+          if(requestdata.status==200){
             setrequest(requestdata.data)
             setloading(false)
-         }else{
-            toast.info(requestdata.data.message,{toastId:"34"})
-         }
-                                                                             
+         }                                                                             
         } catch (error) {
            toast.error(error.response.data.message,{toastId:"35"}) 
         }

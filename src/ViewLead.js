@@ -18,14 +18,10 @@ function ViewLead() {
             setloading(true)
             let lead = await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                                     "role":window.localStorage.getItem("app-role")}})
-          
-         if(lead.status===200){
+          if(lead.status===200){
             setlead(lead.data)
             setloading(false)
-         }else{
-            toast.info(lead.data.message,{toastId:"32"})
-         }
-                                                                             
+         }                                                                             
         } catch (error) {
            toast.error(error.response.data.message,{toastId:"33"}) 
         }

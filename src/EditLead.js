@@ -23,7 +23,8 @@ function EditLead() {
       setLoading(true)
         let leaddata=await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                              "role":window.localStorage.getItem("app-role")}})
-         if(leaddata.status==200){
+        
+         if(leaddata.status === 200){
             let data=leaddata.data
             formik.setValues({
                 name:data.name,
@@ -34,12 +35,10 @@ function EditLead() {
                 status:data.status 
             })
             setLoading(false);
-         }else{
-            toast.success(leaddata.data.message,{toastId:"5"})
          }
 
      } catch (error) {
-       toast.error(error.response.data.message,{toastId:"6"}) 
+        toast.error(error.response.data.message,{toastId:"6"}) 
      }
   }
   let formik=useFormik({
@@ -75,8 +74,9 @@ function EditLead() {
       try{
       let lead = await axios.put(`${env.api}/lead/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     toast.success(lead.data.message,{toastId:"7"})
+     
       if(lead.status===200){
+        toast.success(lead.data.message,{toastId:"7"})
       Context.setLeadModified(true)
       navigate("/app/leads")
 

@@ -46,7 +46,6 @@ function CreateUser() {
       try{
       let user = await axios.post(`${env.api}/createuser`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     toast.success(user.data.message,{toastId:"3"})
       if(user.status==200){
       formik.setValues({
         firstname:"",
@@ -56,6 +55,7 @@ function CreateUser() {
       password:"",
       access:""
       })
+      toast.success(user.data.message,{toastId:"3"})
       Context.setUserModified(true)
       navigate("/app/users")
 

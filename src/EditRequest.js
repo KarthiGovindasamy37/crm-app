@@ -35,9 +35,6 @@ function EditRequest() {
               
             })
             setLoading(false)
-         }else{
-           
-            toast.info(requestdata.data.message,{toastId:"9"})
          }
 
      } catch (error) {

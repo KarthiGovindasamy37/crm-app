@@ -18,15 +18,10 @@ function ViewUser() {
             setloading(true)
             let viewdata = await axios.get(`${env.api}/user/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                                     "role":window.localStorage.getItem("app-role")}})
-          
-         if(viewdata.status==200){
+          if(viewdata.status === 200){
             setuser(viewdata.data)
             setloading(false)
-         }else{
-          
-            toast.info(viewdata.data.message,{toastId:"36"})
-         }
-                                                                             
+         }                                                                             
         } catch (error) {
           
            toast.error(error.response.data.message,{toastId:"37"}) 

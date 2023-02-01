@@ -20,8 +20,9 @@ function Users() {
           headers: { authorization: window.localStorage.getItem("app-token"),
           role: window.localStorage.getItem("app-role")}
         });
-        toast.success(user.data.message,{toastId:"30"});
+        
         if (user.status === 200) {
+          toast.success(user.data.message,{toastId:"30"});
           let exist = Context.users.filter((ele) => ele._id !== id);
           Context.setUsers(exist);
         }

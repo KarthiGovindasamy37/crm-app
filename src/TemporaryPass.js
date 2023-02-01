@@ -25,10 +25,10 @@ function TemporaryPass() {
     },
     onSubmit:async(values)=>{
       try {
-        let info=await axios.post(`${env.api}/temporarypass`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
+        let info = await axios.post(`${env.api}/temporarypass`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                               "role":window.localStorage.getItem("app-role")}})
-        toast.success(info.data.message,{toastId:"28"})
-        if(info.status==200){
+       if(info.status === 200){
+          toast.success(info.data.message,{toastId:"28"})
           navigate("/reset")
         formik.setValues({
           email:"",

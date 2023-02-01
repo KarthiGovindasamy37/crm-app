@@ -43,12 +43,11 @@ function CreateLead() {
       try{
       let lead = await axios.post(`${env.api}/createlead`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
                                                                            "role":window.localStorage.getItem("app-role")}})
-     toast.success(lead.data.message,{toastId:"1"})
-      if(lead.status==200){
+     if(lead.status === 200){
+        toast.success(lead.data.message,{toastId:"1"})
         Context.setLeadModified(true)
-      navigate("/app/leads")
-
-    }
+        navigate("/app/leads")
+      }
     } 
     catch(error){
    toast.error(error.response.data.message,{toastId:"2"})

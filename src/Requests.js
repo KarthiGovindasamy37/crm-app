@@ -19,22 +19,16 @@ function Services() {
        if(ask){
         let servicedata = await axios.delete(`${env.api}/service/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
         "role":window.localStorage.getItem("app-role")})
-        toast.success(servicedata.data.message,{toastId:"25"})
-        
+               
         if(servicedata.status===200){
+        toast.success(servicedata.data.message,{toastId:"25"})
         let exist=Context.services.filter(ele=>ele._id !== id)
         Context.setServices(exist)
     }
        }
        }catch(error){
-        
-        if(error.response.status===404){
-            toast.error("Sorry file not found",{toastId:"26"})
-        }else{
             toast.error(error.response.data.message,{toastId:"27"}) 
-
-        }
-        }
+       }
     }
   return (
     <div>

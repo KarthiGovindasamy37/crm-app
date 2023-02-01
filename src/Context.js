@@ -57,19 +57,16 @@ export let Provider=({children})=>{
        let users=await axios.get(`${env.api}/users`,{headers:{"authorization":window.localStorage.getItem("app-token"),
        "role":window.localStorage.getItem("app-role")}});
       
-        if(users.status==200){
+        if(users.status === 200){
             setUsers(users.data);
             setUserLoading(false)
             setUserModified(false)
-        }else{
-            alert(users.data.message)
-        }
-       
+        }       
     
     }catch(error){
      
       alert(error.response.data.message)
-      if(error.response.status===440) {
+      if(error.response.status === 440) {
         navigate("/")
        }
     }
@@ -84,13 +81,11 @@ export let Provider=({children})=>{
       setLeads(lead.data)
       setLeadLoading(false)
       setLeadModified(false)
-      }else{
-          alert(lead.data.message)
       }
       
     } catch (error) {
       alert(error.response.data.message)
-      if(error.response.status==440) {
+      if(error.response.status == 440) {
         navigate("/")
        }
     }
@@ -101,19 +96,16 @@ export let Provider=({children})=>{
         setServiceLoading(true)
       let service=await axios.get(`${env.api}/service`,{headers:{"authorization":window.localStorage.getItem("app-token"),
       "role":window.localStorage.getItem("app-role")}})
-      if(service.status==200){
+      if(service.status === 200){
         setServices(service.data)
         setServiceLoading(false)
         setServiceModified(false)
         
-      }else{
-        alert(service.data.message)
       }
-      
     
     } catch (error) {
       alert(error.response.data.message)
-      if(error.response.status==440) {
+      if(error.response.status === 440) {
         navigate("/")
        }
     }
