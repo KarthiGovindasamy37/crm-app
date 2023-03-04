@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
 import { env } from './config'
 import { toast } from 'react-toastify'
@@ -8,6 +8,7 @@ function ViewRequest() {
     let params=useParams()
     let[request,setrequest]=useState({})
     let [loading,setloading]=useState(false)
+    let navigate = useNavigate()
    
     useEffect(()=>{
       requestdata();
@@ -16,14 +17,14 @@ function ViewRequest() {
     let requestdata=async()=>{
         try {
             setloading(true)
-            let requestdata = await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                                    "role":window.localStorage.getItem("app-role")}})
+            let requestdata = await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
           if(requestdata.status==200){
             setrequest(requestdata.data)
             setloading(false)
          }                                                                             
         } catch (error) {
            toast.error(error.response.data.message,{toastId:"35"}) 
+           if(error.response.status === 440) navigate("/")
         }
       
     }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext,useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
 import { toast } from 'react-toastify'
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 function Services() {
 
     let Context=useContext(context)
+    let navigate = useNavigate()
 
     useEffect(()=>{
         Context.setServiceModified(true)
@@ -17,8 +18,7 @@ function Services() {
         try{
        let ask=window.confirm("Confirm delete")     
        if(ask){
-        let servicedata = await axios.delete(`${env.api}/service/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
-        "role":window.localStorage.getItem("app-role")})
+        let servicedata = await axios.delete(`${env.api}/service/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
                
         if(servicedata.status===200){
         toast.success(servicedata.data.message,{toastId:"25"})
@@ -27,7 +27,9 @@ function Services() {
     }
        }
        }catch(error){
+        if(error.response.status === 440) navigate("/")
             toast.error(error.response.data.message,{toastId:"27"}) 
+            
        }
     }
   return (

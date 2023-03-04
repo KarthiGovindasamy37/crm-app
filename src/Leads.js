@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { env } from './config'
 import { context } from './Context'
 import { toast } from 'react-toastify'
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 function Leads() {
 
     let Context=useContext(context)
+    let navigate = useNavigate()
 
     useEffect(()=>{
         Context.setLeadModified(true)
@@ -17,8 +18,7 @@ function Leads() {
         try{
        let ask=window.confirm("Confirm delete")     
        if(ask){
-        let lead = await axios.delete(`${env.api}/lead/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")},
-        "role":window.localStorage.getItem("app-role")})
+        let lead = await axios.delete(`${env.api}/lead/${id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
                 
         if(lead.status===200){
         toast.success(lead.data.message,{toastId:"19"})
@@ -27,7 +27,10 @@ function Leads() {
     }
        }
        }catch(error){
-            toast.error(error.response.data.message,{toastId:"21"}) 
+        if(error.response.status === 440) navigate("/") 
+            toast.error(error.response.data.message,{toastId:"21"})
+            
+            
        }
     }
   return (

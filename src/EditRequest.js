@@ -21,8 +21,7 @@ function EditRequest() {
   let loadrequest=async()=>{
      try {
       setLoading(true)
-        let requestdata=await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                             "role":window.localStorage.getItem("app-role")}})
+        let requestdata=await axios.get(`${env.api}/service/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
          
             if(requestdata.status==200){
               
@@ -38,7 +37,8 @@ function EditRequest() {
          }
 
      } catch (error) {
-       
+      if(error.response.status === 440) navigate("/")
+      if(error.response.status === 401) navigate("/app/requests")
        toast.error(error.response.data.message,{toastId:"10"}) 
      }
   }
@@ -69,8 +69,7 @@ function EditRequest() {
     },
     onSubmit :async(values)=>{
       try{
-      let service = await axios.put(`${env.api}/service/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                           "role":window.localStorage.getItem("app-role")}})
+      let service = await axios.put(`${env.api}/service/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token")}})
      toast.success(service.data.message,{toastId:"11"})
       if(service.status===200){
       Context.setServiceModified(true)
@@ -79,8 +78,8 @@ function EditRequest() {
     }
     } 
     catch(error){
-        
    toast.error(error.response.data.message,{toastId:"12"})
+   if(error.response.status === 440) navigate("/")
     }
     
   }

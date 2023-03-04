@@ -41,8 +41,7 @@ function CreateLead() {
     },
     onSubmit :async(values)=>{
       try{
-      let lead = await axios.post(`${env.api}/createlead`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                           "role":window.localStorage.getItem("app-role")}})
+      let lead = await axios.post(`${env.api}/createlead`,values,{headers:{"authorization":window.localStorage.getItem("app-token")}})
      if(lead.status === 200){
         toast.success(lead.data.message,{toastId:"1"})
         Context.setLeadModified(true)
@@ -50,6 +49,8 @@ function CreateLead() {
       }
     } 
     catch(error){
+   if(error.response.status === 440) navigate("/")
+   if(error.response.status === 401) navigate("/app/leads")
    toast.error(error.response.data.message,{toastId:"2"})
     }
     

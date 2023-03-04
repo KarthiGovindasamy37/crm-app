@@ -1,12 +1,13 @@
 import axios from "axios";
 import React, { useContext,useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { env } from "./config";
 import context from "./Context";
 import { toast } from 'react-toastify'
 
 function Users() {
   let Context = useContext(context);
+  let navigate = useNavigate()
 
   useEffect(()=>{
     Context.setUserModified(true)
@@ -17,9 +18,7 @@ function Users() {
       let ask = window.confirm("Confirm delete");
       if (ask) {
         let user = await axios.delete(`${env.api}/user/${id}`, {
-          headers: { authorization: window.localStorage.getItem("app-token"),
-          role: window.localStorage.getItem("app-role")}
-        });
+          headers: { authorization: window.localStorage.getItem("app-token")}});
         
         if (user.status === 200) {
           toast.success(user.data.message,{toastId:"30"});
@@ -28,6 +27,7 @@ function Users() {
         }
       }
     } catch (error) {
+      if(error.response.status === 440) navigate("/")
       toast.error(error.response.data.message,{toastId:"31"});
     }
   };

@@ -21,8 +21,7 @@ function EditLead() {
   let loadlead=async()=>{
      try {
       setLoading(true)
-        let leaddata=await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                             "role":window.localStorage.getItem("app-role")}})
+        let leaddata=await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
         
          if(leaddata.status === 200){
             let data=leaddata.data
@@ -38,6 +37,8 @@ function EditLead() {
          }
 
      } catch (error) {
+        if(error.response.status === 440) navigate("/")
+        if(error.response.status === 401) navigate("/app/leads")
         toast.error(error.response.data.message,{toastId:"6"}) 
      }
   }
@@ -72,8 +73,7 @@ function EditLead() {
     },
     onSubmit :async(values)=>{
       try{
-      let lead = await axios.put(`${env.api}/lead/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                           "role":window.localStorage.getItem("app-role")}})
+      let lead = await axios.put(`${env.api}/lead/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token")}})
      
       if(lead.status===200){
         toast.success(lead.data.message,{toastId:"7"})
@@ -83,8 +83,8 @@ function EditLead() {
     }
     } 
     catch(error){
-        
-   toast.error(error.response.data.message,{toastId:"8"})
+       toast.error(error.response.data.message,{toastId:"8"})
+       if(error.response.status === 440) navigate("/")
     }
     
   }

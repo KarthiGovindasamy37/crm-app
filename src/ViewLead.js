@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { env } from './config'
 import { toast } from 'react-toastify'
@@ -8,6 +8,7 @@ function ViewLead() {
     let params=useParams()
     let[lead,setlead]=useState({})
     let [loading,setloading]=useState(false)
+    let navigate = useNavigate()
    
     useEffect(()=>{
       leaddata();
@@ -16,14 +17,14 @@ function ViewLead() {
     let leaddata=async()=>{
         try {
             setloading(true)
-            let lead = await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                                    "role":window.localStorage.getItem("app-role")}})
+            let lead = await axios.get(`${env.api}/lead/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
           if(lead.status===200){
             setlead(lead.data)
             setloading(false)
          }                                                                             
         } catch (error) {
            toast.error(error.response.data.message,{toastId:"33"}) 
+           if(error.response.status === 440) navigate("/")
         }
       
     }

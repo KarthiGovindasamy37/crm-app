@@ -21,8 +21,7 @@ function EditUser() {
   let loaduser=async()=>{
     try {
       setloading(true)
-        let user=await axios.get(`${env.api}/user/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                             "role":window.localStorage.getItem("app-role")}})
+        let user=await axios.get(`${env.api}/user/${params.id}`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
  if(user.status==200){
   setloading(false)
     formik.setValues({
@@ -33,9 +32,10 @@ function EditUser() {
         access:user.data.access 
     })
  }
-    } catch (error) {
-        
-     toast.error(error.response.data.message,{toastId:"14"})   
+    } catch (error) {   
+      if(error.response.status === 440) navigate("/")
+      if(error.response.status === 401) navigate("/app/users")
+      toast.error(error.response.data.message,{toastId:"14"})
     }
  }
  
@@ -66,12 +66,11 @@ function EditUser() {
     },
     onSubmit :async(values)=>{
       try{
-      let user = await axios.put(`${env.api}/edituser/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                           "role":window.localStorage.getItem("app-role")}})
+      let user = await axios.put(`${env.api}/edituser/${params.id}`,values,{headers:{"authorization":window.localStorage.getItem("app-token")}})
      
-      if(user.status==200){
-      formik.setValues({
-        firstname:"",
+      if(user.status === 200){
+      formik.setValues({ 
+      firstname:"",
       lastname:"",
       email:"",
       role:"",
@@ -84,6 +83,7 @@ function EditUser() {
     }
     } 
     catch(error){
+        if(error.response.status === 440) navigate("/")
         toast.error(error.response.data.message,{toastId:"16"})
     }
     

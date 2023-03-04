@@ -44,9 +44,8 @@ function CreateUser() {
     },
     onSubmit :async(values)=>{
       try{
-      let user = await axios.post(`${env.api}/createuser`,values,{headers:{"authorization":window.localStorage.getItem("app-token"),
-                                                                           "role":window.localStorage.getItem("app-role")}})
-      if(user.status==200){
+      let user = await axios.post(`${env.api}/createuser`,values,{headers:{"authorization":window.localStorage.getItem("app-token")}})
+      if(user.status === 200){
       formik.setValues({
         firstname:"",
       lastname:"",
@@ -62,6 +61,8 @@ function CreateUser() {
     }
     } 
     catch(error){
+   if(error.response.status === 440) navigate("/")
+   if(error.response.status === 401) navigate("/app/requests")
    toast.error(error.response.data.message,{toastId:"4"})
     }
     

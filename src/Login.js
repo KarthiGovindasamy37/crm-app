@@ -33,7 +33,6 @@ let formik=useFormik({
      setLoading(false)
       if(userdata.status===200){
         window.localStorage.setItem("app-token",userdata.data.token);
-        window.localStorage.setItem("app-role",userdata.data.role);
         navigate("/app/page");
     }
      } catch (error) {
@@ -101,6 +100,7 @@ let formik=useFormik({
               <h6>Manager--mohan@gmail.com--mohan</h6>
               <h6>Employee with access--mahesh@gmail.com--mahesh</h6>
               <h6>Employee without access--dharun@gmail.com--dharun</h6>
+              <h6>JWT expiry time - 5 minutes</h6>
             </div>
           </div>
         </div>

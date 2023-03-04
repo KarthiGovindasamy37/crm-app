@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { env } from "./config";
+import { toast } from "react-toastify";
 
  export let context=createContext()
 
@@ -54,8 +55,8 @@ export let Provider=({children})=>{
         try
         {
         setUserLoading(true)
-       let users=await axios.get(`${env.api}/users`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-       "role":window.localStorage.getItem("app-role")}});
+        
+       let users=await axios.get(`${env.api}/users`,{headers:{"authorization":window.localStorage.getItem("app-token")}});
       
         if(users.status === 200){
             setUsers(users.data);
@@ -64,38 +65,39 @@ export let Provider=({children})=>{
         }       
     
     }catch(error){
-     
-      alert(error.response.data.message)
       if(error.response.status === 440) {
         navigate("/")
+        setUserModified(false)
        }
+      toast.error(error.response.data.message,{toastId:Math.random()})
+      
     }
 }
 
     let loadLeads=async()=>{
     try {
       setLeadLoading(true)
-      let lead=await axios.get(`${env.api}/lead`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-      "role":window.localStorage.getItem("app-role")}})
-      if(lead.status=200){
+      let lead=await axios.get(`${env.api}/lead`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
+      if(lead.status === 200){
       setLeads(lead.data)
       setLeadLoading(false)
       setLeadModified(false)
       }
       
     } catch (error) {
-      alert(error.response.data.message)
-      if(error.response.status == 440) {
+      if(error.response.status === 440) {
         navigate("/")
+        setLeadModified(false)
        }
+      toast.error(error.response.data.message,{toastId:Math.random()})
+      
     }
 }
 
     let loadServices=async()=>{
     try {
         setServiceLoading(true)
-      let service=await axios.get(`${env.api}/service`,{headers:{"authorization":window.localStorage.getItem("app-token"),
-      "role":window.localStorage.getItem("app-role")}})
+      let service=await axios.get(`${env.api}/service`,{headers:{"authorization":window.localStorage.getItem("app-token")}})
       if(service.status === 200){
         setServices(service.data)
         setServiceLoading(false)
@@ -104,10 +106,12 @@ export let Provider=({children})=>{
       }
     
     } catch (error) {
-      alert(error.response.data.message)
       if(error.response.status === 440) {
         navigate("/")
+        setServiceModified(false)
        }
+      toast.error(error.response.data.message,{toastId:Math.random()})
+      
     }
 }
 
