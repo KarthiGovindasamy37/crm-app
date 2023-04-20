@@ -70,7 +70,7 @@ let formik=useFormik({
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="password"
                     onChange={formik.handleChange}
